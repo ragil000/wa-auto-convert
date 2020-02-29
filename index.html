@@ -1,0 +1,149 @@
+<!--A Design by W3layouts
+   Author: W3layout
+   Author URL: http://w3layouts.com
+   License: Creative Commons Attribution 3.0 Unported
+   License URL: http://creativecommons.org/licenses/by/3.0/
+   -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Whatsapp API Auto Convert</title>
+    <!-- Meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Allied Login Form Responsive Widget, Audio and Video players, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design"
+    />
+    <script>
+        addEventListener("load", function () { setTimeout(hideURLbar, 0); }, false); function hideURLbar() { window.scrollTo(0, 1); }
+    </script>
+    <!-- Meta tags -->
+    <!-- font-awesome icons -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!--stylesheets-->
+    <link href="css/style.css" rel='stylesheet' type='text/css' media="all">
+    <!--//style sheet end here-->
+    <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <h1 class="error">Whatsapp API Auto Convert</h1>
+    <div class="w3layouts-two-grids">
+        <div class="mid-class">
+            <div class="txt-left-side">
+                <p>Ini adalah aplikasi yang berfungsi untuk mengonversi nomor telpon menjadi api Whatsapp.
+                    Untuk memudahkan pengguna agar tidak perlu save nomor dulu jika ingin melakukan chat via Whatsapp.</p>
+                <form action="#" method="post">
+                    <span id="alert-number">sasas</span>
+                    <div class="form-left-to-w3l">
+                        <span class="fa fa-phone" aria-hidden="true"></span>
+                        <input type="text" name="number" id="input-number" placeholder="08xxxxxxxx" maxlength="12" required="">
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="form-left-to-w3l" id="link-api">
+                        <span class="fa fa-whatsapp" aria-hidden="true"></span>
+                        <input type="text" name="number" id="link-wa" class="disable">
+                        <input type="button" onclick="buka()" id="btn-buka" value="buka">
+                        <input type="button" onclick="salin()" id="btn-salin" value="salin">
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="btnn">
+                        <button type="submit" id="btn-convert">Convert</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="img-right-side">
+                <img src="images/b11.png" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+    <footer class="copyrigh-wthree">
+        <p>
+            © 2020 Develop by <a href="https://www.instagram.com/ragilyudhanto/" target="_blank">RMY</a> | Design by
+            <a href="http://www.W3Layouts.com" target="_blank">W3Layouts</a>
+        </p>
+    </footer>
+    
+    <script>
+        $(document).ready(function() {
+            // disable spasi dan karakter lain
+            $('body').on('keypress keyup blur','#input-number', function(e){
+                if (e.keyCode == 32) {
+                    return false
+                }
+
+                $(this).val($(this).val().replace(/[^\d].+/, ""));
+                if ((event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            })
+
+            $('#alert-number').hide()
+            $('#input-number').on('input', function(){
+                $('#link-api').hide()
+
+                let valInput = $('#input-number').val()
+                if(valInput[0] !== undefined){
+                    if(valInput[0] != 0){
+                        $('#alert-number').show()
+                        $('#alert-number').text('Harus dimulai dengan 0.')
+                    }else{  
+                        $('#alert-number').hide()
+                    }
+                }else{
+                    $('#alert-number').hide()
+                }
+            })
+
+            $('#link-api').hide()
+            $('#btn-convert').click(function(e){
+                e.preventDefault()
+                let valInput = $('#input-number').val()
+                let linkAPIWA = valInput.replace('0', 'wa.me/62')
+                if(!$.isNumeric(valInput)){
+                    $('#alert-number').show()
+                    $('#alert-number').text('Hanya boleh diisi angka.')
+                }else{
+                    if(valInput[0] != 0){
+                        $('#alert-number').show()
+                        $('#alert-number').text('Harus dimulai dengan 0')
+                    }else{
+                        if(valInput.length < 11){
+                            $('#alert-number').show()
+                            $('#alert-number').text('Sepertinya nomornya kurang.')
+                        }else{
+                            $('#alert-number').hide()
+                            $('#link-api').show()
+                            $('#link-wa').val(linkAPIWA)   
+                        }
+                    }
+                }
+            })
+        })
+
+        function salin() {
+            let linkWA = $('#link-wa')
+            linkWA.select()
+            // linkWA.setSelectionRange(0, 99999)
+            $.when(document.execCommand("copy")).done(function(){
+                $('#btn-salin').val('tersalin')
+            })
+        }
+
+        function buka() {
+            let valLinkWA = $('#link-wa').val()
+            window.open('https://'+valLinkWA, '_blank')
+        }
+    </script>
+
+</body>
+
+</html>
